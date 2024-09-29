@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>Synergy Squad Documentation</header>
+      <ul>
+        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+        <li>
+          <a class="nav-link" href="#What_you_should_already_know"
+            >Components Required:</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href="#JavaScript_and_Java"
+            >Software Components</a
+          >
+        </li>
+        <li><a class="nav-link" href="#Hello_world">AI Algorithms:</a></li>
+        <li>
+          <a class="nav-link" href="#Variables"
+            >Step-by-Step Protocol for Sensor Development</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href="#Declaring_variables"
+            >Calibration of ISEs:</a
+          >
+        </li>
+        <li>
+          <a class="nav-link" href="#Variable_scope">Microcontroller Setup:</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Global_variables">Field Testing:</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#Constants"
+            >AI-Driven Predictive Maintenance:</a
+          >
+        </li>
+        <li><a class="nav-link" href="#Data_types">Sensing and actuating (Primitive)</a></li>
+        
+        <li>
+          <a class="nav-link" href="#if...else_statement"
+            >Sencing and automation complete</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#biochem"
+            >Bio Chemiacal perspective</a>
+        </li>
+        <li>
+          <div style="padding-top:100px"> <hr></div>
+        </li>
+
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction">
+        <header>Introduction</header>
+        <article>
+          <p>
+            The proposed sensor-based kit is designed to measure key nutrient
+            parameters such as Nitrogen (N), Phosphorus (P), and Potassium (K)
+            (collectively referred to as NPK) in Fermented/Liquid Organic Manure
+            (F/L OM) for rural biogas plants. This kit will also integrate
+            sensors to monitor pH, temperature, and moisture content, all of
+            which are critical for understanding the quality of the bio-slurry.
+            The goal is to develop an affordable, AI-driven, real-time nutrient
+            monitoring system that is simple to use and specifically designed
+            for small-scale biogas plants.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="What_you_should_already_know">
+        <header>Components Required:</header>
+        <article>
+          <h1>1. Hardware Componentd</h1>
+          <p>
+            Ion-selective electrodes (ISEs) for measuring N (Ammonium), P
+            (Phosphate), and K (Potassium) ions. pH sensors for measuring the
+            acidity or alkalinity of the bio-slurry. Temperature sensors (such
+            as thermocouples or thermistors) for monitoring temperature
+            fluctuations during digestion. Moisture sensors for detecting the
+            water content in the slurry.
+          </p>
+
+          <ul>
+            <li>
+              <b>Microcontroller Unit (MCU):</b>A low-power microcontroller like
+              the Arduino Nano or ESP32 to process sensor data and transmit it
+              wirelessly if necessary.
+            </li>
+            <li>
+              <b>Power Supply:</b> Battery-powered, with the option for
+              solar-powered operation to fit rural, off-grid environments.
+            </li>
+          </ul>
+          <h1>Recommended Microcontroller: Arduino ESP32</h1>
+
+          <h2>Specifications:</h2>
+          <ul>
+              <li>Processor Type: <span class="specs">Dual-core Tensilica Xtensa 32-bit LX6 microprocessor</span></li>
+              <li>Processor Speed: <span class="specs">Up to 240 MHz</span></li>
+              <li>Flash Memory: <span class="specs">4 MB (some versions may vary)</span></li>
+              <li>SRAM: <span class="specs">520 KB</span></li>
+              <li>Operating Voltage: <span class="specs">3.3V</span></li>
+              <li>Input Voltage: <span class="specs">5V via USB or external power supply</span></li>
+              <li>ADC Resolution: <span class="specs">12-bit</span></li>
+              <li>PWM Channels: <span class="specs">16 channels</span></li>
+              <li>Digital I/O Pins: <span class="specs">34 (where 15 can be used as PWM outputs)</span></li>
+              <li>I2C Pins: <span class="specs">Available (standard SDA and SCL pins)</span></li>
+              <li>SPI Pins: <span class="specs">Available (standard MOSI, MISO, SCK, and CS pins)</span></li>
+          </ul>
+      
+          <h2>I/O Pins Function:</h2>
+          <ul>
+              <li><span class="specs">Digital I/O Pins:</span> Used for digital signals (HIGH/LOW), can be used as input or output.</li>
+              <li><span class="specs">Analog Input Pins (ADC):</span> Capable of reading analog signals (up to 12-bit resolution) from sensors like pH, temperature, etc.</li>
+              <li><span class="specs">PWM Output Pins:</span> Capable of producing Pulse Width Modulated signals for controlling devices like motors or LEDs.</li>
+              <li><span class="specs">I2C Interface:</span> Used for communication with multiple sensors on the same bus (only requires two wires: SDA and SCL).</li>
+              <li><span class="specs">SPI Interface:</span> High-speed communication for interfacing with multiple devices like displays or SD cards.</li>
+          </ul>
+      
+          <h2>Functionality of the ESP32 Processor:</h2>
+          <ul>
+              <li><span class="specs">Real-Time Processing:</span> The dual-core architecture allows for concurrent processing of tasks, making it suitable for handling multiple sensors and Wi-Fi communication simultaneously.</li>
+              <li><span class="specs">Wi-Fi and Bluetooth:</span> The ESP32 can connect to Wi-Fi networks for data transfer and also support Bluetooth communication for added flexibility.</li>
+              <li><span class="specs">Low Power Consumption:</span> Features multiple sleep modes to save power, making it suitable for battery-powered applications.</li>
+          </ul>
+      
+          <h2>Wi-Fi Setup for Data Transfer</h2>
+          <h3>Recommended Wi-Fi Module:</h3>
+          <p>While the ESP32 already has built-in Wi-Fi, if you opt for another Arduino model without Wi-Fi, consider using the ESP8266 Wi-Fi module.</p>
+      
+          <h3>Specifications of the ESP8266:</h3>
+          <ul>
+              <li>Processor: <span class="specs">Tensilica L106 32-bit RISC microcontroller</span></li>
+              <li>Clock Speed: <span class="specs">80 MHz (up to 160 MHz)</span></li>
+              <li>RAM: <span class="specs">160 KB</span></li>
+              <li>Flash Memory: <span class="specs">4 MB (varies by module)</span></li>
+              <li>Operating Voltage: <span class="specs">3.3V</span></li>
+              <li>GPIO Pins: <span class="specs">17 (varies by module)</span></li>
+          </ul>
+      
+          <h3>Components of the Wi-Fi Setup:</h3>
+          <ul>
+              <li><span class="specs">ESP8266 Module:</span> Provides Wi-Fi connectivity for sending data to the API and receiving data back to the Arduino.</li>
+              <li><span class="specs">Power Supply:</span></li>
+              <ul>
+                  <li>Regulated 3.3V Power Supply: Ensure that the ESP8266 is powered correctly; it cannot be powered directly from the Arduino's 5V pin without a voltage regulator.</li>
+              </ul>
+              <li><span class="specs">Connecting Wires:</span> Jumper wires to connect the ESP8266 to the Arduino.</li>
+              <li><span class="specs">Breadboard (optional):</span> For easy prototyping and circuit assembly.</li>
+              <li><span class="specs">Level Shifter (if using ESP8266 with a 5V Arduino):</span> Needed for safe communication between the 5V Arduino and the 3.3V ESP8266.</li>
+          </ul>
+      
+          <h3>Functionality of the Wi-Fi Setup:</h3>
+          <ul>
+              <li><span class="specs">Data Transmission:</span> The ESP8266 module communicates with the Arduino to send sensor data to a cloud-based API and receive commands or updates.</li>
+              <li><span class="specs">API Integration:</span> With Wi-Fi capabilities, the ESP8266 can connect to the internet, allowing it to send and receive HTTP requests to/from a cloud service for data storage and analysis.</li>
+              <li><span class="specs">Real-Time Monitoring:</span> Users can monitor the nutrient parameters in real-time through a web interface or mobile app.</li>
+          </ul>
+      
+          <h3>Connecting the ESP32 or ESP8266 to the Arduino:</h3>
+          <p>If using the ESP32, you can program it directly using the Arduino IDE to read from sensors and handle Wi-Fi communication.</p>
+          <p>If using an Arduino board with the ESP8266, the basic wiring involves connecting:</p>
+          <ul>
+              <li>TX (ESP8266) to RX (Arduino)</li>
+              <li>RX (ESP8266) to TX (Arduino)</li>
+              <li>GND (Both)</li>
+              <li>VCC (ESP8266) to 3.3V (Arduino with Level Shifter)</li>
+              <li>CH_PD (Enable) pin to VCC (ESP8266)</li>
+          </ul>
+      
+          <h2>Conclusion:</h2>
+          <p>The Arduino ESP32 is a robust choice for developing your sensor-based kit due to its processing power, built-in Wi-Fi capabilities, and ample I/O options. If you decide on a non-Wi-Fi Arduino model, the ESP8266 is an excellent and cost-effective solution for enabling Wi-Fi connectivity. By integrating these components, you can successfully develop a real-time monitoring system for nutrient parameters in bio-slurry.</p>
+      
+        </article>
+      </section>
+      <section class="main-section" id="JavaScript_and_Java">
+        <header>Software Components</header>
+        <article>
+          <h1>AI Algorithms:</h1>
+          <p>
+            Machine learning algorithms to analyze the sensor data and predict
+            trends such as nutrient depletion or temperature instability. This
+            will be particularly useful for AI-driven control of feedstock
+            addition and slurry removal.
+          </p>
+          <h1>User Interface (UI):</h1>
+          <p>
+            A simple display (e.g., LCD) or mobile app interface to show the
+            results of NPK levels, pH, temperature, and moisture content in real
+            time.
+          </p>
+          <h1>Cloud Data Storage:</h1>
+          <p>
+            IoT integration to store and analyze long-term data trends using
+            cloud-based platforms like AWS IoT or Google Cloud.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Hello_world">
+        <header>Step-by-Step Protocol for Sensor Development</header>
+        <article>
+          <h1>Step 1: Selection of Sensors</h1>
+          <h4>Nutrient Sensors (N, P, K Detection)</h4>
+          <ul>
+            <li>
+              <b>Nitrogen:</b> Utilize Ammonium ion-selective electrodes
+              (NH4⁺-ISEs) to detect nitrogen in the bio-slurry. These electrodes
+              are sensitive to NH4⁺ ions, which are a key form of nitrogen in
+              organic manure.
+            </li>
+            <li>
+              <b>Phosphorus:</b> For phosphorus, a Phosphate ion-selective
+              electrode (PO4³⁻-ISE) will be used. This sensor responds to
+              phosphate ions in the bio-slurry and is ideal for real-time
+              detection.
+            </li>
+            <li>
+              <b>Potassium:</b> A Potassium ion-selective electrode (K⁺-ISE) can
+              be used for potassium detection, providing direct measurement of
+              available potassium in the manure.
+            </li>
+            <li>
+              <b>pH Sensor:</b> Digital pH sensors based on glass electrodes or
+              solid-state electrodes can be used. These sensors provide
+              real-time feedback on the acid-base balance in the slurry, which
+              is crucial for understanding the microbial health during
+              digestion.
+            </li>
+            <li>
+              <b>Temperature Sensor:</b> Thermocouples or thermistors are common
+              choices for temperature monitoring. These sensors provide
+              real-time data on the digestion temperature, which is essential
+              for maintaining optimal biogas production conditions.
+            </li>
+            <li>
+              <b>Moisture Sensor:</b>Use capacitive moisture sensors to detect
+              water content. These sensors are non-invasive and provide accurate
+              data on the moisture level of the slurry, helping to predict the
+              ease of transport and storage.
+            </li>
+          </ul>
+         
+         
+        </article>
+      </section>
+      <section class="main-section" id="Variables">
+        <header></header>
+        <h1>Step 2: Sensor Calibration</h1>
+
+        <p>
+          <b>Calibration of ISEs:</b>
+          Each ion-selective electrode must be calibrated before use. This
+          involves preparing standard solutions of known ion concentrations
+          (e.g., ammonium, phosphate, potassium) and using these solutions to
+          create a calibration curve. The calibration data will be stored in the
+          microcontroller, allowing the system to correct for any deviations in
+          readings and ensuring accurate real-time measurements.
+        </p>
+        <p>
+          <b>Calibration of pH and Temperature Sensors:</b>
+          pH sensors should be calibrated using standard buffer solutions (pH 4,
+          7, and 10) to ensure accuracy. Temperature sensors must be tested
+          against a known temperature reference to ensure accuracy.
+        </p>
+        <p>
+          You can use ISO 8859-1 or Unicode letters such as å and ü in
+          identifiers. You can also use the Unicode escape sequences as
+          characters in identifiers. Some examples of legal names are
+          Number_hits, temp99, and _name.
+        </p>
+      </section>
+      <section class="main-section" id="Declaring_variables">
+        <header></header>
+        <article>
+          <h1>
+            Step 3: Integration with Microcontroller and Software Development
+          </h1>
+
+          <p>
+            <b>Microcontroller Setup:</b>
+            Connect the sensors to a microcontroller (e.g., ESP32). The
+            microcontroller will receive the data from the sensors, process it,
+            and then display the results on a digital interface or transmit it
+            to the cloud. Power-efficient data logging will be set up to store
+            continuous data from the sensors for trend analysis.
+          </p>
+          <p>
+            <b>Software Development:</b>
+            Write the sensor interfacing code using programming languages such
+            as Python or C++. Develop the AI-based algorithms to monitor trends
+            in nutrient content, temperature, and pH levels. Machine learning
+            models (e.g., Random Forest or Decision Trees) can be used to
+            predict any necessary adjustments, like adding feedstock or altering
+            temperature to optimize digestion. Create a user-friendly interface,
+            either on a small LCD screen or a mobile app, where farmers can see
+            real-time nutrient readings and health status of their bio-slurry.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Variable_scope">
+        <header></header>
+        <article>
+          <h1>Step 4: Testing and Validation</h1>
+          <h3>Field Testing:</h3>
+          <p>
+            Test the kit at a small biogas plant under different conditions,
+            such as varying temperature, feedstock types, and bio-slurry
+            compositions. Compare the sensor readings against lab-based
+            measurements of NPK to ensure accuracy.
+          </p>
+          <h3>Validation:</h3>
+          <p>
+            Ensure the system operates accurately and reliably for an extended
+            period in rural settings. Key indicators for success include
+            accurate nutrient readings, ease of use, and robustness under
+            different environmental conditions. Additional Considerations
+          </p>
+        
+        </article>
+      </section>
+      <section class="main-section" id="Global_variables">
+        <header></header>
+        <article>
+          <h1>AI-Driven Predictive Maintenance:</h1>
+          <p>
+            Implement predictive algorithms based on sensor data trends to
+            notify users of upcoming maintenance needs, like cleaning sensors or
+            replenishing power supplies, ensuring system longevity. Wireless
+            Communication (Optional for Remote Monitoring)
+          </p>
+
+          <p>
+            Integrate the sensor kit with IoT (Internet of Things) technology
+            using Wi-Fi or LoRa modules. This will allow remote monitoring and
+            control of the system from a central hub or mobile device.
+            Cost-Effective Design.
+          </p>
+          <p>
+            Ensure that the sensor materials and components are locally
+            available and affordable, allowing for easy scalability across rural
+            biogas plants in India. Conclusion The proposed sensor-based kit
+            provides an innovative, cost-effective, and scalable solution for
+            real-time nutrient analysis in bio-slurry. By utilizing AI-driven
+            algorithms, ion-selective electrodes, and simple interface designs,
+            this kit will empower rural farmers to monitor their bio-slurry’s
+            nutrient content, optimize its usage in agriculture, and improve the
+            overall efficiency of biogas production systems. The protocol
+            outlined ensures that the technology is feasible, accessible, and
+            implementable in the rural Indian context, directly addressing the
+            problem statement's goals.
+          </p>
+        </article>
+      </section>
+      <section class="main-section" id="Constants">
+       
+        </article>
+      </section>
+      <section class="main-section" id="Data_types">
+        <header>sensing and actuation [Primitive and periodically trained]</header>
+        <p>
+          Arduino IDE code that sends sensor data (NPK, pH, temperature, and
+          moisture) to a database and automates functions using the ESP32
+          microcontroller, we can use the following approach:
+        </p>
+        <article>
+          <h1>Components of the Code:</h1>
+          <ol>
+            <li>
+              <b>Sensor Reading:</b> Code to read data from the sensors (NPK,
+              pH, temperature, and moisture sensors).
+            </li>
+            <li>
+              <b>Wi-Fi Connectivity:</b> ESP32 will connect to Wi-Fi to transmit
+              the data.
+            </li>
+            <li>
+              <b>HTTP Communication: </b>Sending data to a remote database or
+              cloud platform via HTTP (you could use REST APIs to send data to
+              platforms like Firebase, AWS IoT, or your custom database).
+            </li>
+            <li>
+              <b>Automation: </b> Use the sensor data to trigger actions such as
+              adjusting feedstock, temperature, or other operations.
+            </li>
+          </ol>
+          <h1>Libraries Required:</h1>
+          <ul>
+            <li>
+                WiFi.h for Wi-Fi communication.
+            </li>
+            <li>
+                HTTPClient.h for sending HTTP requests.
+            </li>
+            <li>
+                Sensor-specific libraries (depending on the specific sensors you're using).
+            </li>
+            <li>
+                Some general-purpose libraries for data processing (if needed).
+            </li>
+          </ul>
+
+          <h3 style="padding-top: 20px;">Code for automating in Arduino</h3>
+          <code style="background-color: black; color:aliceblue; border-radius: 15px;">
+            <span style="color: #dcdcaa;">//Example code</span>
+        
+            <span style="color: #569cd6;">#include</span> <span style="color: #ce9178;">&lt;WiFi.h&gt;</span>
+            <span style="color: #569cd6;">#include</span> <span style="color: #ce9178;">&lt;HTTPClient.h&gt;</span>
+            
+            <span style="color: #dcdcaa;">// network credentials</span>
+            <span style="color: #569cd6;">const char*</span> ssid = <span style="color: #ce9178;">"your_SSID"</span>;
+            <span style="color: #569cd6;">const char*</span> password = <span style="color: #ce9178;">"your_PASSWORD"</span>;
+            
+            <span style="color: #dcdcaa;">//server API endpoint or database URL</span>
+            <span style="color: #569cd6;">const char*</span> serverName = <span style="color: #ce9178;">"http://your-server.com/api/upload"</span>;
+            
+            <span style="color: #569cd6;">unsigned long</span> previousMillis = <span style="color: #b5cea8;">0</span>; 
+            <span style="color: #569cd6;">const long</span> interval = <span style="color: #b5cea8;">10000</span>; <span style="color: #dcdcaa;">// Send data every 10 seconds</span>
+            
+            <span style="color: #dcdcaa;">// Define pins for sensors</span>
+            <span style="color: #569cd6;">#define</span> N_SENSOR_PIN <span style="color: #b5cea8;">34</span>
+            <span style="color: #569cd6;">#define</span> P_SENSOR_PIN <span style="color: #b5cea8;">35</span>
+            <span style="color: #569cd6;">#define</span> K_SENSOR_PIN <span style="color: #b5cea8;">32</span>
+            <span style="color: #569cd6;">#define</span> PH_SENSOR_PIN <span style="color: #b5cea8;">33</span>
+            <span style="color: #569cd6;">#define</span> TEMP_SENSOR_PIN <span style="color: #b5cea8;">4</span>
+            <span style="color: #569cd6;">#define</span> MOISTURE_SENSOR_PIN <span style="color: #b5cea8;">15</span>
+            
+            <span style="color: #dcdcaa;">// Variables to store sensor data</span>
+            <span style="color: #569cd6;">float</span> nitrogen = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> phosphorus = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> potassium = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> pH = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> temperature = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> moisture = <span style="color: #b5cea8;">0.0</span>;
+            
+            <span style="color: #dcdcaa;">void setup() {</span>
+              <span style="color: #dcdcaa;">// Initialize serial communication</span>
+              Serial.begin(<span style="color: #b5cea8;">115200</span>);
+              
+              <span style="color: #dcdcaa;">// Initialize sensors (replace with actual initialization code if needed)</span>
+              <span style="color: #dcdcaa;">// For example, initialize I2C, ADC, etc.</span>
+            
+              <span style="color: #dcdcaa;">// Connect to Wi-Fi</span>
+              WiFi.begin(ssid, password);
+              Serial.print(<span style="color: #ce9178;">"Connecting to WiFi"</span>);
+              
+              <span style="color: #dcdcaa;">while (WiFi.status() != WL_CONNECTED) {</span>
+                delay(<span style="color: #b5cea8;">1000</span>);
+                Serial.print(<span style="color: #ce9178;">"."</span>);
+              <span style="color: #dcdcaa;">}</span>
+              
+              Serial.println();
+              Serial.println(<span style="color: #ce9178;">"Connected to WiFi"</span>);
+            <span style="color: #dcdcaa;">}</span>
+            
+            <span style="color: #dcdcaa;">void loop() {</span>
+              <span style="color: #dcdcaa;">// Read sensor data</span>
+              nitrogen = readNitrogen();
+              phosphorus = readPhosphorus();
+              potassium = readPotassium();
+              pH = readPH();
+              temperature = readTemperature();
+              moisture = readMoisture();
+            
+              <span style="color: #dcdcaa;">// Display sensor readings in serial monitor for debugging</span>
+              Serial.print(<span style="color: #ce9178;">"N: "</span>); Serial.print(nitrogen);
+              Serial.print(<span style="color: #ce9178;">", P: "</span>); Serial.print(phosphorus);
+              Serial.print(<span style="color: #ce9178;">", K: "</span>); Serial.print(potassium);
+              Serial.print(<span style="color: #ce9178;">", pH: "</span>); Serial.print(pH);
+              Serial.print(<span style="color: #ce9178;">", Temp: "</span>); Serial.print(temperature);
+              Serial.print(<span style="color: #ce9178;">", Moisture: "</span>); Serial.println(moisture);
+            
+              <span style="color: #dcdcaa;">// Automation logic: You can add conditions based on sensor readings</span>
+              <span style="color: #dcdcaa;">if (temperature > 40) {</span>
+                <span style="color: #dcdcaa;">// Example: If temperature is too high, take action</span>
+                Serial.println(<span style="color: #ce9178;">"Warning: High temperature detected!"</span>);
+                <span style="color: #dcdcaa;">// Add logic to control the biogas plant (e.g., fan, cooling system)</span>
+              <span style="color: #dcdcaa;">}</span>
+              
+              <span style="color: #dcdcaa;">// Send data to the database every `interval` milliseconds</span>
+              <span style="color: #569cd6;">unsigned long</span> currentMillis = millis();
+              <span style="color: #dcdcaa;">if (currentMillis - previousMillis >= interval) {</span>
+                previousMillis = currentMillis;
+                sendToDatabase();
+              <span style="color: #dcdcaa;">}</span>
+            
+              delay(<span style="color: #b5cea8;">1000</span>); <span style="color: #dcdcaa;">// Delay for stability (adjust based on requirement)</span>
+            <span style="color: #dcdcaa;">}</span>
+            
+            <span style="color: #dcdcaa;">// Function to read nitrogen sensor data</span>
+            <span style="color: #569cd6;">float</span> readNitrogen() {
+              <span style="color: #dcdcaa;">// Replace with actual code to read nitrogen sensor</span>
+              <span style="color: #569cd6;">return</span> analogRead(N_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>); <span style="color: #dcdcaa;">// Example for analog read</span>
+            <span style="color: #dcdcaa;">}</span>
+            
+            <span style="color: #dcdcaa;">// Function to read phosphorus sensor data</span>
+            <span style="color: #569cd6;">float</span> readPhosphorus() {
+              <span style="color: #dcdcaa;">// Replace with actual code to read phosphorus sensor</span>
+              <span style="color: #569cd6;">return</span> analogRead(P_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>);
+            <span style="color: #dcdcaa;">}</span>
+            <span style="color: #dcdcaa;">//Example code</span>
+
+            <span style="color: #569cd6;">#include</span> <span style="color: #ce9178;">&lt;WiFi.h&gt;</span>
+            <span style="color: #569cd6;">#include</span> <span style="color: #ce9178;">&lt;HTTPClient.h&gt;</span>
+            
+            <span style="color: #dcdcaa;">// network credentials</span>
+            <span style="color: #569cd6;">const char*</span> ssid = <span style="color: #ce9178;">"your_SSID"</span>;
+            <span style="color: #569cd6;">const char*</span> password = <span style="color: #ce9178;">"your_PASSWORD"</span>;
+            
+            <span style="color: #dcdcaa;">//server API endpoint or database URL</span>
+            <span style="color: #569cd6;">const char*</span> serverName = <span style="color: #ce9178;">"http://your-server.com/api/upload"</span>;
+            
+            <span style="color: #569cd6;">unsigned long</span> previousMillis = <span style="color: #b5cea8;">0</span>; 
+            <span style="color: #569cd6;">const long</span> interval = <span style="color: #b5cea8;">10000</span>; <span style="color: #dcdcaa;">// Send data every 10 seconds</span>
+            
+            <span style="color: #dcdcaa;">// Define pins for sensors</span>
+            <span style="color: #569cd6;">#define</span> N_SENSOR_PIN <span style="color: #b5cea8;">34</span>
+            <span style="color: #569cd6;">#define</span> P_SENSOR_PIN <span style="color: #b5cea8;">35</span>
+            <span style="color: #569cd6;">#define</span> K_SENSOR_PIN <span style="color: #b5cea8;">32</span>
+            <span style="color: #569cd6;">#define</span> PH_SENSOR_PIN <span style="color: #b5cea8;">33</span>
+            <span style="color: #569cd6;">#define</span> TEMP_SENSOR_PIN <span style="color: #b5cea8;">4</span>
+            <span style="color: #569cd6;">#define</span> MOISTURE_SENSOR_PIN <span style="color: #b5cea8;">15</span>
+            
+            <span style="color: #dcdcaa;">// Variables to store sensor data</span>
+            <span style="color: #569cd6;">float</span> nitrogen = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> phosphorus = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> potassium = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> pH = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> temperature = <span style="color: #b5cea8;">0.0</span>;
+            <span style="color: #569cd6;">float</span> moisture = <span style="color: #b5cea8;">0.0</span>;
+            
+            <span style="color: #dcdcaa;">void setup() {</span>
+              <span style="color: #dcdcaa;">// Initialize serial communication</span>
+              Serial.begin(<span style="color: #b5cea8;">115200</span>);
+              
+              <span style="color: #dcdcaa;">// Initialize sensors (replace with actual initialization code if needed)</span>
+              <span style="color: #dcdcaa;">// For example, initialize I2C, ADC, etc.</span>
+            
+              <span style="color: #dcdcaa;">// Connect to Wi-Fi</span>
+              WiFi.begin(ssid, password);
+              Serial.print(<span style="color: #ce9178;">"Connecting to WiFi"</span>);
+              
+              <span style="color: #dcdcaa;">while (WiFi.status() != WL_CONNECTED) {</span>
+                delay(<span style="color: #b5cea8;">1000</span>);
+                Serial.print(<span style="color: #ce9178;">"."</span>);
+              <span style="color: #dcdcaa;">}</span>
+              
+              Serial.println();
+              Serial.println(<span style="color: #ce9178;">"Connected to WiFi"</span>);
+            <span style="color: #dcdcaa;">}</span>
+            
+            <span style="color: #dcdcaa;">void loop() {</span>
+              <span style="color: #dcdcaa;">// Read sensor data</span>
+              nitrogen = readNitrogen();
+              phosphorus = readPhosphorus();
+              potassium = readPotassium();
+              pH = readPH();
+              temperature = readTemperature();
+              moisture = readMoisture();
+            
+              <span style="color: #dcdcaa;">// Display sensor readings in serial monitor for debugging</span>
+              Serial.print(<span style="color: #ce9178;">"N: "</span>); Serial.print(nitrogen);
+              Serial.print(<span style="color: #ce9178;">", P: "</span>); Serial.print(phosphorus);
+              Serial.print(<span style="color: #ce9178;">", K: "</span>); Serial.print(potassium);
+              Serial.print(<span style="color: #ce9178;">", pH: "</span>); Serial.print(pH);
+              Serial.print(<span style="color: #ce9178;">", Temp: "</span>); Serial.print(temperature);
+              Serial.print(<span style="color: #ce9178;">", Moisture: "</span>); Serial.println(moisture);
+            
+              <span style="color: #dcdcaa;">// Automation logic: You can add conditions based on sensor readings</span>
+              <span style="color: #dcdcaa;">if (temperature > 40) {</span>
+                <span style="color: #dcdcaa;">// Example: If temperature is too high, take action</span>
+                Serial.println(<span style="color: #ce9178;">"Warning: High temperature detected!"</span>);
+                <span style="color: #dcdcaa;">// Add logic to control the biogas plant (e.g., fan, cooling system)</span>
+              <span style="color: #dcdcaa;">}</span>
+              
+              <span style="color: #dcdcaa;">// Send data to the database every `interval` milliseconds</span>
+              <span style="color: #569cd6;">unsigned long</span> currentMillis = millis();
+              <span style="color: #dcdcaa;">if (currentMillis - previousMillis >= interval) {</span>
+                previousMillis = currentMillis;
+                sendToDatabase();
+              <span style="color: #dcdcaa;">}</span>
+            
+              delay(<span style="color: #b5cea8;">1000</span>); <span style="color: #dcdcaa;">// Delay for stability (adjust based on requirement)</span>
+            <span style="color: #dcdcaa;">}</span>
+            
+            <span style="color: #dcdcaa;">// Function to read nitrogen sensor data</span>
+            <span style="color: #569cd6;">float</span> readNitrogen() {
+              <span style="color: #dcdcaa;">// Replace with actual code to read nitrogen sensor</span>
+              <span style="color: #569cd6;">return</span> analogRead(N_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>); <span style="color: #dcdcaa;">// Example for analog read</span>
+            <span style="color: #dcdcaa;">}</span>
+            
+            <span style="color: #dcdcaa;">// Function to read phosphorus sensor data</span>
+            <span style="color: #569cd6;">float</span> readPhosphorus() {
+              <span style="color: #dcdcaa;">// Replace with actual code to read phosphorus sensor</span>
+              <span style="color: #569cd6;">return</span> analogRead(P_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>);
+            <span style="color: #dcdcaa;">}</span>
+        
+            <span style="color: #dcdcaa;">// Function to read potassium sensor data</span>
+<span style="color: #569cd6;">float</span> readPotassium() {
+  <span style="color: #dcdcaa;">// Replace with actual code to read potassium sensor</span>
+  <span style="color: #569cd6;">return</span> analogRead(K_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>);
+<span style="color: #dcdcaa;">}</span>
+
+<span style="color: #dcdcaa;">// Function to read pH sensor data</span>
+<span style="color: #569cd6;">float</span> readPH() {
+  <span style="color: #dcdcaa;">// Replace with actual code to read pH sensor</span>
+  <span style="color: #569cd6;">return</span> analogRead(PH_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>);
+<span style="color: #dcdcaa;">}</span>
+
+<span style="color: #dcdcaa;">// Function to read temperature sensor data</span>
+<span style="color: #569cd6;">float</span> readTemperature() {
+  <span style="color: #dcdcaa;">// Replace with actual code to read temperature sensor</span>
+  <span style="color: #569cd6;">return</span> analogRead(TEMP_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>);
+<span style="color: #dcdcaa;">}</span>
+
+<span style="color: #dcdcaa;">// Function to read moisture sensor data</span>
+<span style="color: #569cd6;">float</span> readMoisture() {
+  <span style="color: #dcdcaa;">// Replace with actual code to read moisture sensor</span>
+  <span style="color: #569cd6;">return</span> analogRead(MOISTURE_SENSOR_PIN) * (<span style="color: #b5cea8;">5.0</span> / <span style="color: #b5cea8;">1023.0</span>);
+<span style="color: #dcdcaa;">}</span>
+
+<span style="color: #dcdcaa;">// Function to send sensor data to the database</span>
+<span style="color: #569cd6;">void</span> sendToDatabase() {
+  <span style="color: #569cd6;">if</span> (WiFi.status() == WL_CONNECTED) {
+    HTTPClient http;
+    http.begin(serverName);
+    http.addHeader(<span style="color: #ce9178;">"Content-Type"</span>, <span style="color: #ce9178;">"application/json"</span>);
+
+    <span style="color: #dcdcaa;">// Prepare JSON data</span>
+    <span style="color: #569cd6;">String</span> jsonData = <span style="color: #ce9178;">"{\"nitrogen\": "</span> + String(nitrogen) +
+                     <span style="color: #ce9178;">", \"phosphorus\": "</span> + String(phosphorus) +
+                     <span style="color: #ce9178;">", \"potassium\": "</span> + String(potassium) +
+                     <span style="color: #ce9178;">", \"pH\": "</span> + String(pH) +
+                     <span style="color: #ce9178;">", \"temperature\": "</span> + String(temperature) +
+                     <span style="color: #ce9178;">", \"moisture\": "</span> + String(moisture) + <span style="color: #ce9178;">"}"</span>;
+
+    <span style="color: #dcdcaa;">// Send HTTP POST request</span>
+    <span style="color: #569cd6;">int</span> httpResponseCode = http.POST(jsonData);
+
+    <span style="color: #dcdcaa;">// Print HTTP response</span>
+    <span style="color: #569cd6;">if</span> (httpResponseCode > <span style="color: #b5cea8;">0</span>) {
+      <span style="color: #dcdcaa;">// Success</span>
+      Serial.print(<span style="color: #ce9178;">"HTTP Response code: "</span>);
+      Serial.println(httpResponseCode);
+    } <span style="color: #569cd6;">else</span> {
+      <span style="color: #dcdcaa;">// Failure</span>
+      Serial.print(<span style="color: #ce9178;">"Error code: "</span>);
+      Serial.println(httpResponseCode);
+    }
+    http.end();
+  } <span style="color: #569cd6;">else</span> {
+    Serial.println(<span style="color: #ce9178;">"WiFi Disconnected"</span>);
+  }
+<span style="color: #dcdcaa;">}</span>
+
+        
+        </code>
+            
+        <h1>Explanation:</h1>
+          <ul>
+            <li>
+                <b>Wi-Fi Setup:</b>  Connect the ESP32 to a Wi-Fi network.
+            </li>
+            <li>
+                <b>Sensor Readings:</b> The code simulates sensor readings.
+                 Replace the analogRead() lines with actual sensor code, depending on your sensors.
+            </li>
+            <li>
+                <b>HTTP POST Request:</b>Sends sensor data in JSON format to the 
+                server using HTTP POST. Modify the serverName 
+                to point to your server or database endpoint.
+            </li>
+            <li>
+                <b>Automation Logic:</b>  Example automation logic is included to act 
+                based on sensor data (e.g., if temperature exceeds a threshold).
+            </li>
+          </ul>
+
+          <h1>Modifications:</h1>
+          <ol>
+            <li>
+                <b>Sensor Libraries: </b>  You need to include specific sensor
+                 libraries for NPK, pH, temperature, and moisture sensors based on the hardware.
+            </li>
+            <li>
+                <b>Database Integration:</b> Replace serverName with the actual database URL or API endpoint.
+            </li>
+            <li>
+                <b>More Advanced Automation:</b>You can add more automation logic to 
+                take specific actions based on sensor readings, such as controlling hardware components (fans, pumps, etc.).
+            </li>
+            <li>
+                <b>Automation Logic:</b>  Example automation logic is included to act 
+                based on sensor data (e.g., if temperature exceeds a threshold).
+            </li>
+          </ol>
+
+          <h1>test</h1>
+          <ol>
+            <li>
+                Upload the code to your ESP32 using Arduino IDE.
+            </li>
+            <li>
+                Set up your server or database endpoint to receive HTTP POST requests.
+            </li>
+            <li>
+                Verify that sensor data is being sent to the database and that automated actions are triggered as expected.
+            </li>
+           
+          </ol>
+
+
+        </article>
+      </section>
+      <section class="main-section" id="if...else_statement">
+        <header>Sencing and automation complete</header>
+        <article>
+          <p>To achieve the goal of collecting sensor data from an Arduino Uno, sending it to an Express.js API for further analysis using machine learning in Python,
+             and then returning the results back to the Arduino to control actuators, the setup can be broken down into several parts:</p>
+            
+             <h1>Overview of the System:</h1>
+             <ol>
+               <li>
+                    <b>Arduino Uno:</b> Collects sensor data (e.g., from NPK, pH, temperature, and moisture sensors)
+                     and sends it to the Express.js API via serial or Wi-Fi/Ethernet.
+               </li>
+               <li>
+                  <b>Express.js API:</b> Receives the data, stores it, and calls a Python script for machine learning analysis..
+               </li>
+               <li>
+                  <b>Python Script:</b>Performs machine learning on the received data and sends results 
+                  (e.g., recommendations or predictions) back to the Express.js API.
+               </li>
+               <li>
+                  <b>Arduino Actuator:</b> The processed results are sent back to the Arduino Uno,
+                   which then triggers the appropriate actuators (e.g., fans, pumps).
+               </li>
+               
+             </ol>
+
+            <h1><b>Step1</b></h1>
+            <h3>Part 1: Arduino Uno Code to Send Sensor Data to Express.js API</h3>
+            <p>If you're using an Arduino Uno, you can send data to the API using 
+                the Ethernet module (for wired connection) or ESP8266/ESP01 module for wireless (Wi-Fi).</p>
+
+            <h2>Arduino Uno Code (with Ethernet/Wi-Fi module):</h2>
+            <ul>
+                <li>For Ethernet: Ethernet.h</li>
+                <li>For Wi-Fi (ESP8266): ESP8266WiFi.h</li>
+            </ul>
+            <p style="padding-top: 10px;">Here is an example code using the Ethernet module:</p>
+
+          <code style="background-color: black; color:green">
+            //Arduino
+
+            #include (SPI.h)
+            #include (Ethernet.h) // Include Ethernet library for wired connection
+            
+            // MAC address and IP of your Arduino Ethernet shield
+            byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+            IPAddress server(192, 168, 1, 100); // IP address of the server where Express.js is running
+            EthernetClient client;
+            
+            // Sensor Pins
+            int N_SENSOR_PIN = A0;
+            int P_SENSOR_PIN = A1;
+            int K_SENSOR_PIN = A2;
+            int PH_SENSOR_PIN = A3;
+            int TEMP_SENSOR_PIN = A4;
+            int MOISTURE_SENSOR_PIN = A5;
+            
+            void setup() {
+              // Start Ethernet connection
+              Ethernet.begin(mac);
+              Serial.begin(9600);
+              
+              // Wait for connection:
+              if (Ethernet.begin(mac) == 0) {
+                Serial.println("Failed to configure Ethernet using DHCP");
+                while (true);
+              }
+              
+              Serial.println("Ethernet connected");
+            }
+            
+            void loop() {
+              // Reading sensor data
+              int nitrogen = analogRead(N_SENSOR_PIN);
+              int phosphorus = analogRead(P_SENSOR_PIN);
+              int potassium = analogRead(K_SENSOR_PIN);
+              int ph = analogRead(PH_SENSOR_PIN);
+              int temp = analogRead(TEMP_SENSOR_PIN);
+              int moisture = analogRead(MOISTURE_SENSOR_PIN);
+            
+              // Check if connection is established to server
+              if (client.connect(server, 3000)) { // 3000 is the port number where Express.js is running
+                Serial.println("Connected to server");
+            
+                // Create a JSON payload with the sensor data
+                String jsonData = "{";
+                jsonData += "\"nitrogen\":" + String(nitrogen) + ",";
+                jsonData += "\"phosphorus\":" + String(phosphorus) + ",";
+                jsonData += "\"potassium\":" + String(potassium) + ",";
+                jsonData += "\"pH\":" + String(ph) + ",";
+                jsonData += "\"temperature\":" + String(temp) + ",";
+                jsonData += "\"moisture\":" + String(moisture);
+                jsonData += "}";
+            
+                // HTTP POST request to send the data to the Express.js API
+                client.println("POST /data HTTP/1.1");
+                client.println("Host: 192.168.1.100");
+                client.println("Content-Type: application/json");
+                client.println("Connection: close");
+                client.print("Content-Length: ");
+                client.println(jsonData.length());
+                client.println();
+                client.println(jsonData);
+            
+                // Close connection
+                client.stop();
+              } else {
+                Serial.println("Connection failed");
+              }
+            
+              // Wait before sending the next batch of data
+              delay(5000); // 5 seconds
+            }
+            </code>
+            
+            <h3>You will create a simple Express.js server that listens for POST requests containing the sensor data.
+                 The server will store the data and call a Python script to perform machine learning.</h3>
+           
+            <p style="padding-top: 10px;">Install the necessary packages:</p>
+            <code style="background-color: black; color:white">
+                npm install express body-parser
+            </code>
+            <p style="padding-top: 10px;">Create an app.js file</p>
+            <code style="background-color: black; color:white">
+              <p>//JavaScript</p>
+            
+            <span style="color: #569cd6;">const</span> express = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'express'</span>);
+            <span style="color: #569cd6;">const</span> bodyParser = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'body-parser'</span>);
+            <span style="color: #569cd6;">const</span> { spawn } = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'child_process'</span>);
+            <span style="color: #569cd6;">const</span> app = express();
+            <span style="color: #569cd6;">const</span> port = <span style="color: #b5cea8;">3000</span>; <span style="color: #6a9955;">// Port where the server will run</span>
+            
+            app.use(bodyParser.json());
+            
+            <span style="color: #6a9955;">// Route to handle POST requests from Arduino</span>
+            app.post(<span style="color: #ce9178;">'/data'</span>, (req, res) => {
+                <span style="color: #569cd6;">const</span> sensorData = req.body;
+                console.log(<span style="color: #ce9178;">'Received sensor data:'</span>, sensorData);
+            
+                <span style="color: #6a9955;">// Call Python script for ML analysis</span>
+                <span style="color: #569cd6;">const</span> pythonProcess = spawn(<span style="color: #ce9178;">'python'</span>, [<span style="color: #ce9178;">'ml_script.py'</span>, JSON.stringify(sensorData)]);
+            
+                pythonProcess.stdout.on(<span style="color: #ce9178;">'data'</span>, (data) => {
+                    console.log(<span style="color: #ce9178;">`Python script output: ${data}`</span>);
+                    res.json({ result: data.toString() }); <span style="color: #6a9955;">// Send result back to Arduino</span>
+                });
+            
+                pythonProcess.stderr.on(<span style="color: #ce9178;">'data'</span>, (data) => {
+                    console.error(<span style="color: #ce9178;">`Error in Python script: ${data}`</span>);
+                });
+            });
+            
+            app.listen(port, () => {
+                console.log(<span style="color: #ce9178;">`Express server listening on port ${port}`</span>);
+            });
+            <span style="color: #569cd6;">// Additional route to handle other requests</span>
+app.get(<span style="color: #ce9178;">'/status'</span>, (req, res) => {
+    res.json({ status: <span style="color: #ce9178;">'Server is running'</span> });
+});
+
+<span style="color: #569cd6;">// Error handling middleware</span>
+app.use((err, req, res, next) => {
+    console.error(<span style="color: #ce9178;">'Error occurred:'</span>, err);
+    res.status(<span style="color: #b5cea8;">500</span>).json({ error: <span style="color: #ce9178;">'Internal Server Error'</span> });
+});
+
+<span style="color: #569cd6;">// Start the server</span>
+app.listen(port, () => {
+    console.log(<span style="color: #ce9178;">`Express server listening on port ${port}`</span>);
+});
+<span style="color: #569cd6;">const</span> express = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'express'</span>);
+<span style="color: #569cd6;">const</span> bodyParser = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'body-parser'</span>);
+<span style="color: #569cd6;">const</span> { spawn } = <span style="color: #dcdcaa;">require</span>(<span style="color: #ce9178;">'child_process'</span>);
+<span style="color: #569cd6;">const</span> app = express();
+<span style="color: #569cd6;">const</span> port = <span style="color: #b5cea8;">3000</span>; <span style="color: #6a9955;">// Port where the server will run</span>
+
+app.use(bodyParser.json());
+
+<span style="color: #6a9955;">// Route to handle POST requests from Arduino</span>
+app.post(<span style="color: #ce9178;">'/data'</span>, (req, res) => {
+    <span style="color: #569cd6;">const</span> sensorData = req.body;
+    console.log(<span style="color: #ce9178;">'Received sensor data:'</span>, sensorData);
+
+    <span style="color: #6a9955;">// Call Python script for ML analysis</span>
+    <span style="color: #569cd6;">const</span> pythonProcess = spawn(<span style="color: #ce9178;">'python'</span>, [<span style="color: #ce9178;">'ml_script.py'</span>, JSON.stringify(sensorData)]);
+
+    pythonProcess.stdout.on(<span style="color: #ce9178;">'data'</span>, (data) => {
+        console.log(<span style="color: #ce9178;">`Python script output: ${data}`</span>);
+        res.json({ result: data.toString() }); <span style="color: #6a9955;">// Send result back to Arduino</span>
+    });
+
+    pythonProcess.stderr.on(<span style="color: #ce9178;">'data'</span>, (data) => {
+        console.error(<span style="color: #ce9178;">`Error in Python script: ${data}`</span>);
+    });
+});
+
+<span style="color: #569cd6;">// Additional route to handle other requests</span>
+app.get(<span style="color: #ce9178;">'/status'</span>, (req, res) => {
+    res.json({ status: <span style="color: #ce9178;">'Server is running'</span> });
+});
+
+<span style="color: #569cd6;">// Error handling middleware</span>
+app.use((err, req, res, next) => {
+    console.error(<span style="color: #ce9178;">'Error occurred:'</span>, err);
+    res.status(<span style="color: #b5cea8;">500</span>).json({ error: <span style="color: #ce9178;">'Internal Server Error'</span> });
+});
+
+<span style="color: #569cd6;">// Start the server</span>
+app.listen(port, () => {
+    console.log(<span style="color: #ce9178;">`Express server listening on port ${port}`</span>);
+});
+</code>
+
+        <h1>Part 3: Python Script for Machine Learning Analysis</h1>
+        <p>Create a Python script (ml_script.py) that will analyze the incoming data and
+             output the result. You can use libraries like sklearn or tensorflow depending on your machine learning model.</p>
+
+             <p style="padding-top: 10px;">Python</p>
+             <code style="background-color: black; color: white;">
+              <span class="keyword">import</span> sys<br>
+              <span class="keyword">import</span> json<br>
+              <span class="keyword">import</span> numpy as np<br>
+              <span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression<br>
+              <span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split<br>
+              <span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error<br><br>
+              
+              <span class="comment"># Sample training data (modify this with actual training data)</span><br>
+              <span class="comment"># Features: nitrogen, phosphorus, potassium, pH, temperature, moisture</span><br>
+              X = np.array([<br>
+                  [<span class="number">1.0</span>, <span class="number">0.5</span>, <span class="number">0.3</span>, <span class="number">6.5</span>, <span class="number">22.0</span>, <span class="number">10.0</span>],<br>
+                  [<span class="number">1.2</span>, <span class="number">0.6</span>, <span class="number">0.4</span>, <span class="number">6.7</span>, <span class="number">23.0</span>, <span class="number">12.0</span>],<br>
+                  [<span class="number">1.5</span>, <span class="number">0.7</span>, <span class="number">0.6</span>, <span class="number">6.9</span>, <span class="number">24.0</span>, <span class="number">15.0</span>],<br>
+                  <span class="comment"># Add more training samples here</span><br>
+              ])<br><br>
+              
+              <span class="comment"># Target variable (modify according to your prediction goal)</span><br>
+              y = np.array([<span class="number">10</span>, <span class="number">12</span>, <span class="number">15</span>])  <span class="comment"># Example output values for the training data</span><br><br>
+              
+              <span class="comment"># Create and train the Linear Regression model</span><br>
+              model = LinearRegression()<br>
+              model.fit(X, y)<br><br>
+              
+              <span class="comment"># Save the trained model</span><br>
+              <span class="keyword">import</span> joblib<br>
+              joblib.dump(model, <span class="string">'linear_regression_model.pkl'</span>)<br><br>
+              
+              <span class="comment"># Load the pre-trained model (this will be used for predictions)</span><br>
+              model = joblib.load(<span class="string">'linear_regression_model.pkl'</span>)<br><br>
+              
+              <span class="comment"># Get the sensor data from the command line argument</span><br>
+              sensor_data = json.loads(sys.argv[<span class="number">1</span>])  <span class="comment"># Expecting a JSON string</span><br><br>
+              
+              <span class="comment"># Extract features (modify according to your input data structure)</span><br>
+              features = np.array([<br>
+                  sensor_data[<span class="string">'nitrogen'</span>],<br>
+                  sensor_data[<span class="string">'phosphorus'</span>],<br>
+                  sensor_data[<span class="string">'potassium'</span>],<br>
+                  sensor_data[<span class="string">'pH'</span>],<br>
+                  sensor_data[<span class="string">'temperature'</span>],<br>
+                  sensor_data[<span class="string">'moisture'</span>] <br>
+              ]).reshape(<span class="number">1</span>, -<span class="number">1</span>)<br><br>
+              
+              <span class="comment"># Perform prediction using the ML model</span><br>
+              prediction = model.predict(features)<br><br>
+              
+              <span class="comment"># Output the prediction (which will be sent back to Express.js)</span><br>
+              print(prediction[<span class="number">0</span>])<br>
+              </code>
+        <h1>Part 4: Arduino Actuator Control Based on Machine Learning Output</h1>
+        <p>Now that the result of the machine learning analysis is returned to the Arduino, you can use it to control actuators.
+             Add this code to your Arduino loop to handle the actuator control based on the received data.</p>
+
+             <p style="padding-top: 10px;"></p>
+             <code style="background-color: black; color:green">
+                import sys
+                void loop() {
+                    // Read sensor data
+                    // ... (same as before)
+                  
+                    // Connect and send data to Express.js server
+                    // ... (same as before)
+                  
+                    // Wait for response from server
+                    if (client.available()) {
+                      String line = client.readStringUntil('\r');
+                      Serial.println("Response from server: " + line);
+                  
+                      // Parse the response and control actuators
+                      if (line.indexOf("Activate Pump") >= 0) {
+                        // Activate pump or actuator based on ML result
+                        digitalWrite(PUMP_PIN, HIGH);
+                      } else if (line.indexOf("Deactivate Pump") >= 0) {
+                        digitalWrite(PUMP_PIN, LOW);
+                      }
+                    }
+                  
+                    // Close connection
+                    client.stop();
+                  }
+                  
+
+            </code>
+
+            <h1>Part 5: Testing the System</h1>
+            <ol>
+                <li>
+                  <b>Run the Express.js server:</b> Use node app.js to start the server.
+                </li>
+                <li>
+                  <b>Upload the Arduino sketch </b>to your Arduino Uno with the appropriate sensor and actuator connections.
+
+                </li>
+                <li>
+                  <b>Run the Python script</b>in the background that performs machine learning on the received data.
+                </li>
+                <li>
+                  <b>Observe the behavior:</b> When data is sent from Arduino to the API, it should pass through the machine
+                   learning pipeline, and the results should come back to the Arduino, triggering the appropriate actions.
+                </li>
+              </ol>
+
+              <h1>Conclusion</h1>
+              <p>This system will collect sensor data from the Arduino Uno, send it to an Express.js API, perform 
+                machine learning analysis in Python, and return actionable insights back to the Arduino for controlling actuators. By integrating real-time data collection and processing, 
+                you can create a fully automated system for smart farming, biogas plants, or any similar use case.</p>
+         
+        </article>
+      </section>
+      <section class="main-section" id="biochem">
+
+        <h1  style="padding-top: 40px;"><b>Common questions you might have in Bio Chemistry during the process of production of Biogas</b></h1>
+        <article>
+          <h1>1] Whats the Impact of Ammonium, Phosphate, and Potassium Ions in Biogas Production?</h1>
+    
+          <p>The presence of ions like ammonium (<span class="chemical">NH<sub>4</sub><sup>+</sup></span>), phosphate (<span class="chemical">PO<sub>4</sub><sup>3−</sup></span>), and potassium (<span class="chemical">K<sup>+</sup></span>) in manure significantly affects bacterial performance in biogas production. These ions are crucial nutrients but can also cause imbalances in microbial activity, which is why understanding their concentrations is vital when adding biochar. Here’s how each ion affects the process and how biochar mitigates problems associated with them:</p>
+      
+          <h2>1. Ammonium (<span class="chemical">NH<sub>4</sub><sup>+</sup></span>)</h2>
+          <ul>
+              <li><span class="section-title">Effect on Bacteria:</span> Ammonium is a major source of nitrogen for bacteria in anaerobic digestion (AD), which is essential for microbial growth. However, at high concentrations, ammonium can lead to the accumulation of free ammonia (<span class="chemical">NH<sub>3</sub></span>), which is toxic to methanogenic bacteria (the microbes that produce methane in biogas).</li>
+              <li><span class="section-title">Need for Analysis:</span> Analyzing ammonium concentration is crucial to avoid toxic levels of ammonia. A balance must be maintained to provide nitrogen without inhibiting microbial activity. Excessive nitrogen can lead to inhibition of the methanogens, slowing down the biogas yield.</li>
+              <li><span class="section-title">Biochar Role:</span> Biochar can absorb ammonium ions, reducing the free ammonia levels in the digester. It acts as a buffer, helping to maintain favorable conditions for the methanogenic bacteria, thus preventing toxicity and enhancing biogas production.</li>
+          </ul>
+      
+          <h2>2. Phosphate (<span class="chemical">PO<sub>4</sub><sup>3−</sup></span>)</h2>
+          <ul>
+              <li><span class="section-title">Effect on Bacteria:</span> Phosphate is a key nutrient for microbial metabolism, playing a vital role in energy transfer and the formation of nucleic acids. However, excessive phosphate can cause imbalances in the nutrient ratio, leading to suboptimal microbial growth.</li>
+              <li><span class="section-title">Need for Analysis:</span> Monitoring phosphate levels ensures that bacteria have an adequate but not excessive supply of phosphorus. Too much phosphorus can disrupt nutrient cycling and inhibit the activity of other key nutrients needed for balanced microbial growth.</li>
+              <li><span class="section-title">Biochar Role:</span> Biochar can bind phosphate ions, helping to regulate the concentration in the digester. By preventing an excess of phosphate, biochar creates a more stable environment for microbial communities to thrive.</li>
+          </ul>
+      
+          <h2>3. Potassium (<span class="chemical">K<sup>+</sup></span>)</h2>
+          <ul>
+              <li><span class="section-title">Effect on Bacteria:</span> Potassium is an essential element for bacterial enzyme activity and cellular function. It helps maintain osmotic balance in the cells. However, at high concentrations, potassium can become toxic to microbes, particularly methanogens.</li>
+              <li><span class="section-title">Need for Analysis:</span> Analyzing potassium concentrations helps avoid toxicity. Maintaining the right levels of potassium is crucial for sustaining optimal microbial function, as too much can lead to inhibition of methane production.</li>
+              <li><span class="section-title">Biochar Role:</span> Biochar can adsorb potassium, preventing high concentrations from accumulating in the system. This moderates potassium availability, keeping it at a non-toxic level for bacteria.</li>
+          </ul>
+      
+          <h2>Why N, P, K Analysis is Crucial for Biochar Addition</h2>
+          <ul>
+              <li><span class="section-title">Balancing Nutrients:</span> Nitrogen, phosphorus, and potassium are essential nutrients for microbial growth in anaerobic digestion, but their balance is critical. Excessive levels of any one ion can lead to nutrient imbalances that inhibit microbial processes, especially methanogenesis (methane production).</li>
+              <li><span class="section-title">Preventing Inhibition:</span> Ammonia and potassium toxicity are common problems in anaerobic digestion. Analyzing these nutrients ensures that concentrations remain within safe limits for microbial communities.</li>
+              <li><span class="section-title">Optimizing Biogas Production:</span> Adequate nitrogen (N), phosphorus (P), and potassium (K) support microbial growth, while excess can inhibit it. Biochar helps regulate these concentrations, ensuring efficient breakdown of organic matter and maximizing methane production in biogas.</li>
+          </ul>
+      
+          <h2>How Biochar Solves the Problem Created by These Ions</h2>
+          <ul>
+              <li><span class="section-title">Adsorption of Excess Ions:</span> Biochar has a high surface area and cation exchange capacity, allowing it to adsorb excess ammonium, phosphate, and potassium ions. This prevents ion toxicity while still making these nutrients available in a controlled manner to the microbes.</li>
+              <li><span class="section-title">pH Buffering:</span> Biochar helps buffer pH, especially in the presence of high ammonium concentrations, which can otherwise shift pH levels and disrupt microbial activity.</li>
+              <li><span class="section-title">Enhanced Microbial Activity:</span> Biochar provides a favorable surface for microbial attachment and colonization, improving bacterial efficiency in the anaerobic digester. This leads to better organic matter breakdown and enhanced biogas production.</li>
+              <li><span class="section-title">Reducing Toxicity:</span> By adsorbing ammonium and potassium, biochar mitigates the risk of toxicity to methanogenic bacteria, ensuring continuous and stable methane production.</li>
+          </ul>
+      
+          <div class="conclusion">
+              <strong>Conclusion:</strong> The analysis of nitrogen, phosphorus, and potassium (N, P, K) is essential when adding biochar to manure for biogas production because these nutrients directly affect bacterial health and activity. Biochar enhances biogas production by adsorbing excess ions, preventing nutrient imbalances, reducing toxicity, and creating a stable environment for methanogens. This improves the overall efficiency and yield of the anaerobic digestion process.
+          </div>
+        </article>
+        <h1 styles="padding-top:40px"><b>2] How Ammonium, Phosphate, and Potassium Ions are produced in the process of production of bio gas?</b></h1>
+        <article">
+          <h1>The Impact of Ammonium, Phosphate, and Potassium Ions in Biogas Production</h1>
+    
+    <p>The presence of ions like ammonium (<span class="chemical">NH<sub>4</sub><sup>+</sup></span>), phosphate (<span class="chemical">PO<sub>4</sub><sup>3−</sup></span>), and potassium (<span class="chemical">K<sup>+</sup></span>) in manure significantly affects bacterial performance in biogas production. These ions are crucial nutrients but can also cause imbalances in microbial activity, which is why understanding their concentrations is vital when adding biochar. Here’s how each ion affects the process and how biochar mitigates problems associated with them:</p>
+
+    <h2>1. Ammonium (<span class="chemical">NH<sub>4</sub><sup>+</sup></span>)</h2>
+    <ul>
+        <li><span class="section-title">Effect on Bacteria:</span> Ammonium is a major source of nitrogen for bacteria in anaerobic digestion (AD), which is essential for microbial growth. However, at high concentrations, ammonium can lead to the accumulation of free ammonia (<span class="chemical">NH<sub>3</sub></span>), which is toxic to methanogenic bacteria (the microbes that produce methane in biogas).</li>
+        <li><span class="section-title">Need for Analysis:</span> Analyzing ammonium concentration is crucial to avoid toxic levels of ammonia. A balance must be maintained to provide nitrogen without inhibiting microbial activity. Excessive nitrogen can lead to inhibition of the methanogens, slowing down the biogas yield.</li>
+        <li><span class="section-title">Biochar Role:</span> Biochar can absorb ammonium ions, reducing the free ammonia levels in the digester. It acts as a buffer, helping to maintain favorable conditions for the methanogenic bacteria, thus preventing toxicity and enhancing biogas production.</li>
+    </ul>
+
+    <h2>2. Phosphate (<span class="chemical">PO<sub>4</sub><sup>3−</sup></span>)</h2>
+    <ul>
+        <li><span class="section-title">Effect on Bacteria:</span> Phosphate is a key nutrient for microbial metabolism, playing a vital role in energy transfer and the formation of nucleic acids. However, excessive phosphate can cause imbalances in the nutrient ratio, leading to suboptimal microbial growth.</li>
+        <li><span class="section-title">Need for Analysis:</span> Monitoring phosphate levels ensures that bacteria have an adequate but not excessive supply of phosphorus. Too much phosphorus can disrupt nutrient cycling and inhibit the activity of other key nutrients needed for balanced microbial growth.</li>
+        <li><span class="section-title">Biochar Role:</span> Biochar can bind phosphate ions, helping to regulate the concentration in the digester. By preventing an excess of phosphate, biochar creates a more stable environment for microbial communities to thrive.</li>
+    </ul>
+
+    <h2>3. Potassium (<span class="chemical">K<sup>+</sup></span>)</h2>
+    <ul>
+        <li><span class="section-title">Effect on Bacteria:</span> Potassium is an essential element for bacterial enzyme activity and cellular function. It helps maintain osmotic balance in the cells. However, at high concentrations, potassium can become toxic to microbes, particularly methanogens.</li>
+        <li><span class="section-title">Need for Analysis:</span> Analyzing potassium concentrations helps avoid toxicity. Maintaining the right levels of potassium is crucial for sustaining optimal microbial function, as too much can lead to inhibition of methane production.</li>
+        <li><span class="section-title">Biochar Role:</span> Biochar can adsorb potassium, preventing high concentrations from accumulating in the system. This moderates potassium availability, keeping it at a non-toxic level for bacteria.</li>
+    </ul>
+
+    <h2>Why N, P, K Analysis is Crucial for Biochar Addition</h2>
+    <ul>
+        <li><span class="section-title">Balancing Nutrients:</span> Nitrogen, phosphorus, and potassium are essential nutrients for microbial growth in anaerobic digestion, but their balance is critical. Excessive levels of any one ion can lead to nutrient imbalances that inhibit microbial processes, especially methanogenesis (methane production).</li>
+        <li><span class="section-title">Preventing Inhibition:</span> Ammonia and potassium toxicity are common problems in anaerobic digestion. Analyzing these nutrients ensures that concentrations remain within safe limits for microbial communities.</li>
+        <li><span class="section-title">Optimizing Biogas Production:</span> Adequate nitrogen (N), phosphorus (P), and potassium (K) support microbial growth, while excess can inhibit it. Biochar helps regulate these concentrations, ensuring efficient breakdown of organic matter and maximizing methane production in biogas.</li>
+    </ul>
+
+    <h2>How Biochar Solves the Problem Created by These Ions</h2>
+    <ul>
+        <li><span class="section-title">Adsorption of Excess Ions:</span> Biochar has a high surface area and cation exchange capacity, allowing it to adsorb excess ammonium, phosphate, and potassium ions. This prevents ion toxicity while still making these nutrients available in a controlled manner to the microbes.</li>
+        <li><span class="section-title">pH Buffering:</span> Biochar helps buffer pH, especially in the presence of high ammonium concentrations, which can otherwise shift pH levels and disrupt microbial activity.</li>
+        <li><span class="section-title">Enhanced Microbial Activity:</span> Biochar provides a favorable surface for microbial attachment and colonization, improving bacterial efficiency in the anaerobic digester. This leads to better organic matter breakdown and enhanced biogas production.</li>
+        <li><span class="section-title">Reducing Toxicity:</span> By adsorbing ammonium and potassium, biochar mitigates the risk of toxicity to methanogenic bacteria, ensuring continuous and stable methane production.</li>
+    </ul>
+
+    <div class="conclusion">
+        <strong>Conclusion:</strong> The analysis of nitrogen, phosphorus, and potassium (N, P, K) is essential when adding biochar to manure for biogas production because these nutrients directly affect bacterial health and activity. Biochar enhances biogas production by adsorbing excess ions, preventing nutrient imbalances, reducing toxicity, and creating a stable environment for methanogens. This improves the overall efficiency and yield of the anaerobic digestion process.
+    </div>
+        </article>
+        <h1 style="padding-top: 40px;">3] what would happen if add Bio-char without proper analysis</h1>
+      <article >
+        
+        <h1>Effects of Adding Biochar Without Ion Analysis</h1>
+
+        <p>If you add more biochar without analyzing the concentrations of ions like ammonium (<span class="chemical">NH<sub>4</sub><sup>+</sup></span>), phosphate (<span class="chemical">PO<sub>4</sub><sup>3−</sup></span>), and potassium (<span class="chemical">K<sup>+</sup></span>), several potential issues can arise, both positive and negative. Here's a breakdown of the effects:</p>
+    
+        <h2>1. Over-adsorption of Nutrients</h2>
+        <h3>Potential Problem:</h3>
+        <p>Biochar has a high surface area and cation exchange capacity, meaning it can adsorb large quantities of ions. If the concentrations of ammonium, phosphate, or potassium are already low in the system, adding more biochar could further deplete these essential nutrients. This may limit the availability of these ions for bacterial growth, leading to nutrient deficiencies.</p>
+        <h3>Effect:</h3>
+        <p>Microbes, especially those involved in methane production, require a balanced supply of nitrogen, phosphorus, and potassium. If these are over-adsorbed by the biochar, it could slow down bacterial metabolism, resulting in reduced biogas production.</p>
+    
+        <h2>2. Unbalanced Nutrient Ratios</h2>
+        <h3>Potential Problem:</h3>
+        <p>Adding biochar without analyzing nutrient levels could create imbalances. For example, biochar might adsorb more ammonium or potassium than phosphate, or vice versa, leading to a nutrient imbalance. Bacteria thrive on specific nutrient ratios, and an improper balance can disrupt their metabolic pathways.</p>
+        <h3>Effect:</h3>
+        <p>Unbalanced nutrient ratios can reduce the efficiency of organic matter breakdown and affect the growth and activity of different bacterial populations, especially methanogens. This can lower the yield of methane, slowing down the biogas production process.</p>
+    
+        <h2>3. Inhibition of Biogas Production Due to Reduced Ammonium Availability</h2>
+        <h3>Potential Problem:</h3>
+        <p>Ammonium (<span class="chemical">NH<sub>4</sub><sup>+</sup></span>) is a key nitrogen source for bacteria. If too much biochar is added without checking ammonium levels, it might adsorb most of the available ammonium. Nitrogen deficiency can slow down microbial growth and impair the overall digestion process.</p>
+        <h3>Effect:</h3>
+        <p>Methanogens, the bacteria responsible for methane production, could struggle to perform effectively if nitrogen levels drop too low. This could lead to a drop in the methane yield, reducing the overall efficiency of biogas production.</p>
+    
+        <h2>4. pH Imbalance and Buffering Overload</h2>
+        <h3>Potential Problem:</h3>
+        <p>Biochar can act as a pH buffer, helping to maintain stable pH levels. However, adding excessive biochar without assessing ion concentrations and pH can result in over-buffering. This might shift the pH too far from the optimal range for methanogens (usually between 6.5 and 7.5).</p>
+        <h3>Effect:</h3>
+        <p>If the pH becomes too high or too low, methanogenic bacteria can be inhibited, causing a decrease in methane production. Furthermore, bacteria that thrive in specific pH ranges might not function efficiently, leading to suboptimal anaerobic digestion.</p>
+    
+        <h2>5. Saturation of Biochar Adsorption Capacity</h2>
+        <h3>Potential Problem:</h3>
+        <p>If ion concentrations are high (e.g., excessive ammonium or potassium), biochar may quickly reach its adsorption capacity if too much is added without prior analysis. Once saturated, biochar may no longer be effective in adsorbing excess ions, rendering the additional biochar useless or even counterproductive.</p>
+        <h3>Effect:</h3>
+        <p>The added biochar might not provide additional benefits, and the system could still suffer from ammonium or potassium toxicity if the ion concentrations were initially high. Essentially, overuse of biochar can lead to a waste of resources without solving the problem.</p>
+    
+        <h2>6. Unintended Effects on Microbial Community Structure</h2>
+        <h3>Potential Problem:</h3>
+        <p>Biochar provides a surface for microbial attachment, which can benefit certain bacteria. However, overloading the system with biochar might promote the growth of some bacteria over others, potentially leading to an unbalanced microbial community.</p>
+        <h3>Effect:</h3>
+        <p>If certain bacterial populations grow too rapidly due to favorable conditions on the biochar surface, it could outcompete other essential microbes, including methanogens. This could disrupt the entire anaerobic digestion process, resulting in lower biogas production efficiency.</p>
+    
+        <h2>7. Excess Biochar Can Lead to Solid Accumulation and Reduced Mixing</h2>
+        <h3>Potential Problem:</h3>
+        <p>Adding more biochar without considering its necessity or the system's capacity can lead to the accumulation of solids in the digester. This can reduce the efficiency of mixing, which is essential for maintaining contact between bacteria and the organic matter they are breaking down.</p>
+        <h3>Effect:</h3>
+        <p>Poor mixing can cause stratification in the digester, where heavier biochar and organic solids settle at the bottom. This reduces the overall contact between microbes and the organic material, leading to incomplete digestion and lower biogas yields.</p>
+    
+        <h2>8. Reduced Biogas Yield Due to Over-absorption of Trace Elements</h2>
+        <h3>Potential Problem:</h3>
+        <p>Besides nitrogen, phosphorus, and potassium, biochar can also adsorb other trace elements (e.g., magnesium, calcium, iron) needed for enzyme activity and microbial function. Adding excess biochar could inadvertently reduce the availability of these critical trace elements.</p>
+        <h3>Effect:</h3>
+        <p>A lack of trace elements can impair bacterial enzymes involved in anaerobic digestion, resulting in less efficient degradation of organic material and a decline in methane production.</p>
+    
+        <h2>Summary of Risks of Adding Excess Biochar Without Ion Analysis:</h2>
+        <ul>
+            <li><span class="section-title">Nutrient Deficiency:</span> Over-adsorption of essential nutrients (N, P, K) can limit microbial activity and reduce biogas production.</li>
+            <li><span class="section-title">Nutrient Imbalance:</span> Biochar might adsorb some ions more than others, leading to imbalances that affect microbial metabolism.</li>
+            <li><span class="section-title">pH Disruption:</span> Excessive biochar may over-buffer the system, causing pH shifts that inhibit methane-producing bacteria.</li>
+            <li><span class="section-title">Reduced Efficiency:</span> Saturated biochar won’t provide additional benefits and may fail to prevent ion toxicity if concentrations are too high.</li>
+            <li><span class="section-title">Microbial Imbalance:</span> Overgrowth of certain bacteria due to excess biochar could outcompete other essential microbes, disrupting the digestion process.</li>
+            <li><span class="section-title">Solids Accumulation:</span> Too much biochar can lead to poor mixing and inefficient contact between bacteria and organic material.</li>
+            <li><span class="section-title">Trace Element Deficiency:</span> Excess biochar may reduce the availability of trace elements, further reducing microbial efficiency.</li>
+        </ul>
+    
+        <h2>Conclusion:</h2>
+        <p>Adding biochar without analyzing the concentrations of ions like ammonium, phosphate, and potassium can lead to several issues that hinder the anaerobic digestion process and reduce biogas production. Proper analysis of these ions is critical to optimize the biochar dosage, ensuring it adsorbs excess nutrients without depleting essential ones or creating imbalances in the system.</p>
+      </article>
+
+      </section>
+
+      
+    </main>
+  </body>
+</html>
